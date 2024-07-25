@@ -1,0 +1,159 @@
+{% load socialaccount %}
+{% providers_media_js %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .auth-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 250px;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .auth-button i {
+            font-size: 1.5rem;
+        }
+
+        .auth-button.google {
+            background-color: #db4437;
+        }
+
+        .auth-button.github {
+            background-color: #333;
+        }
+
+        .auth-button.facebook {
+            background-color: #3b5998;
+        }
+
+        .auth-button.instagram {
+            background: radial-gradient(circle at 35% 100%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+
+        .auth-button.linkedin {
+            background-color: #0077b5;
+        }
+
+        .auth-button.telegram {
+            background-color: #0088cc;
+        }
+
+        .auth-button:hover {
+            opacity: 0.8;
+        }
+
+        .auth-button:active::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .auth-button.active {
+            animation: bounce 0.3s;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="auth-buttons">
+    <button class="auth-button google" onclick="authenticate('{% provider_login_url 'google' %}', 'Google')"><i
+            class="fab fa-google"></i>Sign in with Google
+    </button>
+    <button class="auth-button github" onclick="authenticate('{% provider_login_url 'github' %}', 'GitHub')"><i
+            class="fab fa-github"></i>Sign in with GitHub
+    </button>
+    <button class="auth-button facebook" onclick="authenticate('{% provider_login_url 'facebook' %}', 'Facebook')"><i
+            class="fab fa-facebook"></i>Sign in with Facebook
+    </button>
+    <button class="auth-button instagram" onclick="authenticate('https://www.instagram.com', 'Instagram')"><i
+            class="fab fa-instagram"></i>Sign in with Instagram
+    </button>
+    <button class="auth-button linkedin" onclick="authenticate('https://www.linkedin.com', 'LinkedIn')"><i
+            class="fab fa-linkedin"></i>Sign in with LinkedIn
+    </button>
+    <button class="auth-button telegram" onclick="authenticate('https://telegram.org', 'Telegram')"><i
+            class="fab fa-telegram"></i>Sign in with Telegram
+    </button>
+</div>
+<div id="message"></div>
+<script>
+    function authenticate(url, platform) {
+        window.location.href = url;
+        animateButton(platform);
+    }
+
+    function animateButton(platform) {
+        const button = document.querySelector(`.auth-button.${platform.toLowerCase()}`);
+        button.classList.add('active');
+        setTimeout(() => {
+            button.classList.remove('active');
+        }, 300);
+    }
+</script>
+</body>
+</html>
+
+
+
+
