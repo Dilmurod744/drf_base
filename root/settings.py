@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-rkxwu7g=yqw%l&%y8l2768nm%_bsgj3lo7@=*f_matxwrwe5sy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.telegram',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.linkedin_oauth2',
 
     # my-apps
     "apps",
@@ -94,6 +95,22 @@ SOCIALACCOUNT_PROVIDERS = {
             'read:org',
         ],
     },
+    'linkedin_oauth2': {
+        'METHOD': 'oauth2',
+        'CLIENT_ID': '<your-client-id>',
+        'CLIENT_SECRET': '<your-client-secret>',
+        'SCOPE': ['r_liteprofile', 'r_emailaddress'],
+        'AUTH_PARAMS': {
+            'state': 'random_string_to_prevent_csrf',
+        }
+    },
+    'telegram': {
+        'APP': {
+            'client_id': '<bot_id>',
+            'secret': '<bot token>',
+        },
+        'AUTH_PARAMS': {'auth_date_validity': 30},
+    }
 
 }
 

@@ -129,10 +129,11 @@
     <button class="auth-button instagram" onclick="authenticate('https://www.instagram.com', 'Instagram')"><i
             class="fab fa-instagram"></i>Sign in with Instagram
     </button>
-    <button class="auth-button linkedin" onclick="authenticate('https://www.linkedin.com', 'LinkedIn')"><i
+    <button class="auth-button linkedin"
+            onclick="authenticate('{% provider_login_url 'linkedin_oauth2' %}', 'LinkedIn')"><i
             class="fab fa-linkedin"></i>Sign in with LinkedIn
     </button>
-    <button class="auth-button telegram" onclick="authenticate('https://telegram.org', 'Telegram')"><i
+    <button class="auth-button telegram" onclick="authenticate({% provider_login_url 'telegram' %}, 'Telegram')"><i
             class="fab fa-telegram"></i>Sign in with Telegram
     </button>
 </div>
