@@ -103,17 +103,8 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'state': 'random_string_to_prevent_csrf',
         }
-    },
-    'telegram': {
-        'APP': {
-            'client_id': '<bot_id>',
-            'secret': '<bot token>',
-        },
-        'AUTH_PARAMS': {'auth_date_validity': 30},
     }
-
 }
-
 SITE_ID = 1
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
